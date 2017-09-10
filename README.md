@@ -30,7 +30,9 @@ An awesome redux blogging app for easy intergration with my other projects. [red
     webpack 1.12.9
     webpack-dev-server 1.14.0
 
-### Code Breakdown & The Magic
+### Code Breakdown
+
+##### The 'Magic' Function
 
 For managing state inside the apps posts reducer (ref. reducer_posts.js), i utilized a magic function called mapKeys. The way mapKeys works is to provide the first argument with an array and the second argument with the property we want to pull off each object to use as the key on the result object. 
 
