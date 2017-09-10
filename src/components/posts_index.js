@@ -7,13 +7,24 @@ class PostsIndex extends Component {
     this.props.fetchPosts();
   }
 
+  renderPosts() {
+    _.map(this.props.posts)
+  }
+
   render() {
     return (
       <div>
-        Posts Index
+        <h3>Posts</h3>
+        <ul className="list-group">
+          { this.renderPosts() }
+        </ul>
       </div>
     );
   }
 }
 
-export default connect(null, { fetchPosts })(PostsIndex);
+function mapStateToProps(state) {
+  return { posts: state.posts };
+}
+
+export default connect(mapStateToProps(state, x), { fetchPosts })(PostsIndex);
