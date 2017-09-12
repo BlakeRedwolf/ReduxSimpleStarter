@@ -51,7 +51,7 @@ So to quickly look up a post:
 ```
 state["4"]
 ```
-As opposed to using for loops and what not. Simple yet effective.
+As opposed to using for loops and what not.
 
 ##### React Lifecycle Method
 
