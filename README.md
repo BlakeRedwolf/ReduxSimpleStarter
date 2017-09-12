@@ -32,6 +32,29 @@ An awesome redux blogging app for easy intergration with my other projects. [red
 
 ### Code Breakdown
 
+##### React Lifecycle Method
+
+A lifecycle method is a function on a component class that is automatically called by react.
+There are several of these methods, but the one i used was componentDidMount(). The reason behind this is because react will automatically call this method when a component is about to be rendered, so it makes it the perfect place to fetch some data.
+
+```
+class PostsIndex extends Component {
+    componentDidMount() {
+        // perfect place to fetch data
+    }
+
+    render() {
+        return(
+            <div>
+                Posts Index
+            </div>
+        )
+    }
+}
+```
+
+As opposed to fetching data on user action, like onClick. It doesnt make a difference if we call our action creator before or after our component is rendered. Reason for this is because fetching our data is an asyncronous operation. React doesnt have any concept of figuring out how to 'not render this component before we do some preloading operation". React will always render as soon as it can.
+
 ##### The 'Magic' Function
 
 For managing state inside the apps posts reducer (ref. reducer_posts.js), i utilized a magic function called mapKeys. The way mapKeys works is to provide the first argument with an array and the second argument with the property we want to pull off each object to use as the key on the result object. 
@@ -52,29 +75,6 @@ So to quickly look up a post:
 state["4"]
 ```
 As opposed to using for loops and what not.
-
-##### React Lifecycle Method
-
-A lifecycle method is a function on a component class that is automatically called by react.
-There are serval of these methods, but the one i used was componentDidMount(). The reason behind this is because react will automatically call this method when a component is about to be rendered, so it makes it the perfect place to fetch some data.
-
-```
-class PostsIndex extends Component {
-    componentDidMount() {
-        // perfect place to fetch data
-    }
-
-    render() {
-        return(
-            <div>
-                Posts Index
-            </div>
-        )
-    }
-}
-```
-
-As opposed to fetching data on user action, like onClick. It doesnt make a difference if we call our action creator before or after our component is rendered. Reason for this is because fetching our data is an asyncronous operation. React doesnt have any concept of figuring out how to 'not render this component before we do some preloading operation". React will always render as soon as it can.
 
 #### Issues & Bugs
 
