@@ -75,3 +75,31 @@ class PostsIndex extends Component {
 ```
 
 As opposed to fetching data on user action, like onClick. It doesnt make a difference if we call our action creator before or after our component is rendered. Reason for this is because fetching our data is an asyncronous operation. React doesnt have any concept of figuring out how to 'not render this component before we do some preloading operation". React will always render as soon as it can.
+
+#### Issues & Bugs
+
+When routing to a new component, the root path renders along with the component.
+
+```
+ReactDom.render(
+    <Provider store={createStoreWithMiddleware(reducers)}>
+        <BrowserRouter>
+            <div>
+                <Route path="/" component={PostsIndex} /> <!-- !!! -->
+                <Route path="/posts/new" component={PostsNew} /> <!-- !!! -->
+            </div>
+        </BrowserRouter>
+    </Provider>
+    , document.querySelector('.container));
+```
+
+React Router's behavior is funny here. To take care of this issue i added the Switch component from react-router-dom. The Switch component takes in a collection of different routes. Routes are nested inside of the Switch component. Switch will look at all the Routes inside of it, then decide to render only the first route in the current url. In other words you want to put your most specific Routes to the top of the list.
+
+```
+<Switch>
+    <Route path="/posts/new" component={PostsNew} />
+    <Route path="/" component={PostsIndex} />
+</Switch>
+```
+
+This makes React Router behave as expected, and will render routes correctly.
