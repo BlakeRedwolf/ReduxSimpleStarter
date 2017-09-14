@@ -1,5 +1,7 @@
 # Redux Blog
 
+[![forthebadge](http://forthebadge.com/images/badges/built-with-swag.svg)](http://forthebadge.com) [![forthebadge](http://forthebadge.com/images/badges/uses-js.svg)](http://forthebadge.com) [![forthebadge](http://forthebadge.com/images/badges/gluten-free.svg)](http://forthebadge.com)
+
 An awesome redux blogging app for easy intergration with my other projects. [reduxblog](https://github.com/BlakeRedwolf/reduxblog) repo link.
 
 ### Dependencies
