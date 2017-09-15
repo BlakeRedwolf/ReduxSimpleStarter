@@ -64,7 +64,7 @@ class PostsIndex extends Component {
 }
 ```
 
-As opposed to fetching data on user action, like onClick. It doesnt make a difference if we call our action creator before or after our component is rendered. Reason for this is because fetching our data is an asyncronous operation. React doesnt have any concept of figuring out how to 'not render this component before we do some preloading operation". React will always render as soon as it can.
+As opposed to fetching data on user action, like onClick. It doesnt make a difference if we call our action creator before or after our component is rendered. Reason for this is because fetching our data is an asyncronous operation. React doesn't have any concept of figuring out how to "not render this component before we do some preloading operation". React will always render as soon as it can.
 
 ##### The 'Magic' Function
 
