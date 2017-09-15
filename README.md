@@ -6,7 +6,44 @@
 
 ### Code Breakdown
 
-##### React Lifecycle Method
+### The 'Programmatic Navigation' Feature
+
+Here we can see that our api request has returned successfully as an object, with an ID.
+
+![reduxblogsuccessrequestwithid](https://user-images.githubusercontent.com/22486834/30468260-00355954-999f-11e7-8a0a-2ff6244e1181.JPG)
+
+But what happens now? For a better user experience, we would probably want the user to automatically be navigated to there new post after it has been successfully posted. This feature is known as 'Programmatic Navigation'. To accomplish this, we need to specify a route in our application navigate to and we know that we want to navigate to this route after our request has been successfully posted.
+
+Lets start by adding a history.push() and we will specify our root route that shows all our applications posts.
+
+![reduxblogprogrammaticroutenav](https://user-images.githubusercontent.com/22486834/30468266-08a1a052-999f-11e7-9d74-5b7b8a69417e.JPG)
+
+But just being able to navigate to the route is only half the problem, we want to be able navigate there after our post has been successfully created. If our application remained like this, we would be navigating to the route before our post has been created which enters us into a sort of race condition where that post is being created at the same time that we're fetching our list of posts. So theres a 50/50 chance that the new post will even show up.
+
+To accomplish this we are going to pass in a callback function, and move the history.push call inside of it.
+
+![reduxblogprogrammaticroutenavinsideaction](https://user-images.githubusercontent.com/22486834/30468268-0a02c200-999f-11e7-92bf-8314b59822b3.JPG)
+
+Now if the action creator calls this function it will automatically navigate us back to our list of posts. Next we have to visit our action creator file and make sure we receive this as callback by passing 'callback' as the second argument to createPost(). 
+
+```
+export function createPost(values, callback) { // <- here
+```
+
+Finally we will call the callback as a promise after the API request.
+
+```
+const request = axios.post(`${ROOT_URL}/posts${API_KEY}` , values)
+.then(() => callback()); // <- & here
+```
+
+![reduxblogprogrammaticroutenavcallback](https://user-images.githubusercontent.com/22486834/30468269-0bb252aa-999f-11e7-9dfd-28f903fc8de9.JPG)
+
+ Now after we submit our new post, were are automatically navigated to our new post. In the request log you can see the first request complete, then the page instantly changes as we navigate to our list of posts.
+
+![reduxblogfrontpagesuccessnavtopost](https://user-images.githubusercontent.com/22486834/30468244-f3c9f03a-999e-11e7-9727-1816c58f1268.JPG)
+
+##### React Lifecycle Methods
 
 A lifecycle method is a function on a component class that is automatically called by react.
 There are several of these methods, but the one i used was componentDidMount(). The reason behind this is because react will automatically call this method when a component is about to be rendered, so it makes it the perfect place to fetch some data.
@@ -77,43 +114,6 @@ React Router's behavior is funny here. To take care of this issue i added the Sw
 ```
 
 This makes React Router behave as expected, and will render routes correctly.
-
-### The 'Programmatic Navigation' Feature
-
-Here we can see that our api request has returned successfully as an object, with an ID.
-
-![reduxblogsuccessrequestwithid](https://user-images.githubusercontent.com/22486834/30468260-00355954-999f-11e7-8a0a-2ff6244e1181.JPG)
-
-But what happens now? For a better user experience, we would probably want the user to automatically be navigated to there new post after it has been successfully posted. This feature is known as 'Programmatic Navigation'. To accomplish this, we need to specify a route in our application navigate to and we know that we want to navigate to this route after our request has been successfully posted.
-
-Lets start by adding a history.push() and we will specify our root route that shows all our applications posts.
-
-![reduxblogprogrammaticroutenav](https://user-images.githubusercontent.com/22486834/30468266-08a1a052-999f-11e7-9d74-5b7b8a69417e.JPG)
-
-But just being able to navigate to the route is only half the problem, we want to be able navigate there after our post has been successfully created. If our application remained like this, we would be navigating to the route before our post has been created which enters us into a sort of race condition where that post is being created at the same time that we're fetching our list of posts. So theres a 50/50 chance that the new post will even show up.
-
-To accomplish this we are going to pass in a callback function, and move the history.push call inside of it.
-
-![reduxblogprogrammaticroutenavinsideaction](https://user-images.githubusercontent.com/22486834/30468268-0a02c200-999f-11e7-92bf-8314b59822b3.JPG)
-
-Now if the action creator calls this function it will automatically navigate us back to our list of posts. Next we have to visit our action creator file and make sure we receive this as callback by passing 'callback' as the second argument to createPost(). 
-
-```
-export function createPost(values, callback) { // <- here
-```
-
-Finally we will call the callback as a promise after the API request.
-
-```
-const request = axios.post(`${ROOT_URL}/posts${API_KEY}` , values)
-.then(() => callback()); // <- & here
-```
-
-![reduxblogprogrammaticroutenavcallback](https://user-images.githubusercontent.com/22486834/30468269-0bb252aa-999f-11e7-9dfd-28f903fc8de9.JPG)
-
- Now after we submit our new post, were are automatically navigated to our new post. In the request log you can see the first request complete, then the page instantly changes as we navigate to our list of posts.
-
-![reduxblogfrontpagesuccessnavtopost](https://user-images.githubusercontent.com/22486834/30468244-f3c9f03a-999e-11e7-9727-1816c58f1268.JPG)
 
 ### Dependencies
 
