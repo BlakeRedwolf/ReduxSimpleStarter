@@ -12,7 +12,7 @@ Here we can see that our api request has returned successfully as an object, wit
 
 ![reduxblogsuccessrequestwithid](https://user-images.githubusercontent.com/22486834/30468260-00355954-999f-11e7-8a0a-2ff6244e1181.JPG)
 
-But what happens now? For a better user experience, we would probably want the user to automatically be navigated to there new post after it has been successfully posted. This feature is known as 'Programmatic Navigation'. To accomplish this, we need to specify a route in our application navigate to and we know that we want to navigate to this route after our request has been successfully posted.
+But what happens now? For a better user experience, we would probably want the user to automatically be navigated to there new post after it has been successfully posted. This feature is known as 'Programmatic Navigation'. To accomplish this, we need to specify a route in our application to navigate to and we know that we only want to navigate to this route after our request has been successfully posted.
 
 Lets start by adding a history.push() and we will specify our root route that shows all our applications posts.
 
