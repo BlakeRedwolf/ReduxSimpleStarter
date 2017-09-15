@@ -11,13 +11,10 @@ export default function(state = {}, action) {
     //  const newState = { ...state,  };
     //  newState[post.id] = post;
     //  return newState;
-
     return { ...state, [action.payload.data.id]: action.payload.data }; // This is identical to ^ the commented code
     case FETCH_POSTS:
-      return _.mapKeys(action.payload.data, 'id');
+      return _.mapKeys(action.payload.data, 'id'); // we used mapKeys to treat our state object as a object rather then an array, action.payload.data, 'id' is helping us fetch only the post we are interested in
     default:
       return state;
   }
 }
-
-//LF@135.Generalizing Fields 0.00.03.9.14.17
