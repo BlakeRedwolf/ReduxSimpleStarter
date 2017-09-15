@@ -4,7 +4,7 @@
 
 #### An awesome redux blogging app for easy intergration with other React/Redux projects. [reduxblog](https://github.com/BlakeRedwolf/reduxblog) repo link.
 
-### Code Breakdown
+## Code Breakdown
 
 ### The 'Programmatic Navigation' Feature
 
